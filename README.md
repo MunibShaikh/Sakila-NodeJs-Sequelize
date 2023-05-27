@@ -32,7 +32,7 @@ To get started with this Sakila Database Node.js application, follow these steps
 
 3️⃣ Configure the database connection settings in the `config/database.js` file.
 
-4️⃣ Run the application using `node app.js` or `npm start`.
+4️⃣ Run the application using `npm run dev` (if you have nodemon) or `npm start`.
 
 5️⃣ Download database from this URL <https://dev.mysql.com/doc/index-other.html>.
 
