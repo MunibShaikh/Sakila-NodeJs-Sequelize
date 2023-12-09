@@ -1,0 +1,16 @@
+mysql mai query likho jo ye ye kaam kare
+1. users ke table mai 10 entries karai users k columns k naam ye hain
+   (first_name,last_name,full_name,role_id) //role_id ki value 1,2,3  hi hosakti ha
+2. personal_details k table mai entries karai us mai ye columns hain
+    (address,phone_number,email_address,country_name,user_id) // unhi 10 users ki details is mai ayein gi or kisi bhi 4 users ki multiple details insert krwana is table mai.
+3. posts k tables mai entries karao us mai ye columns hain
+    (title,content,user_id) // un 10 mai se 6 users ki entry ismai karao or un 6 mai se 4 ki multiple entries karwana
+4. roles k tables mai ye column hai bs (role_title) is mai ye entries karao
+   1. Tech content creator
+   2. Wild-Life content creator
+   3. Social Issues content creator
+5. ek tags k table mai 20 tags entries karao.
+    column ka naam ha (title)
+6. post_tags k table mai entries karao har post mai kamm se kamm bhi 3 tag to hon
+    is mai ye columns hain (post_id,tag_id)
+sb foreign keys k relation theek hone chaiye matlab sb tables mai theek value hone chaiye insert ki query mai sb tables bane hue hain sirf insert ki query likhna
