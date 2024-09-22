@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   ModelQuerying,
   ModelQueryingFinders,
+  PolymorphicAssociations,
   createAssociation,
   createUser,
   createUserWithDetails,
@@ -73,6 +74,8 @@ const customerRoutes = (router: Router) => {
   router.get(`${routePath}/scopes`, scopes);
   // ## 22 - transaction
   router.get(`${routePath}/transaction`, transaction);
+  // ## 25 - Polymorphic Associations - One To Many
+  router.get(`${routePath}/PolymorphicAssociations`, PolymorphicAssociations);
 };
 
 export default customerRoutes;

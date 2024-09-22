@@ -111,6 +111,35 @@ export default class DatabaseConn {
       db.gameTeam.hasMany(db.playerGameTeam);
       db.playerGameTeam.belongsTo(db.gameTeam);
 
+      // #25 - Polymorphic Associations - One To Many
+      db.image = require("../models/image")(sequelize, DataTypes, Model);
+      db.video = require("../models/video")(sequelize, DataTypes, Model);
+      db.comment = require("../models/comment")(sequelize, DataTypes, Model);
+
+      db.image.hasMany(db.comment, {
+        foreignKey: "commentableId",
+        constraints: false,
+        scope: {
+          commentableType: "image",
+        },
+      });
+      db.comment.belongsTo(db.image, {
+        foreignKey: "commentableId",
+        constraints: false,
+      });
+
+      db.video.hasMany(db.comment, {
+        foreignKey: "commentableId",
+        constraints: false,
+        scope: {
+          commentableType: "video",
+        },
+      });
+      db.comment.belongsTo(db.video, {
+        foreignKey: "commentableId",
+        constraints: false,
+      });
+
       db.sequelize.sync({ force: false }).then(() => {
         console.log("Models Sync Successfully");
       });

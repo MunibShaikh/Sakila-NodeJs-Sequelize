@@ -1007,3 +1007,86 @@ export async function transaction(req: Request, res: Response) {
     res.send(`Error: ${error}`);
   }
 }
+
+export async function PolymorphicAssociations(req: Request, res: Response) {
+  try {
+    // one to many
+    const model: any = new Models();
+    const image = await model.getModel("image");
+    const video = await model.getModel("video");
+    const comment = await model.getModel("comment");
+
+    image.hasMany(comment, {
+      foreignKey: "commentableId",
+      constraints: false,
+      scope: {
+        commentableType: "image",
+      },
+    });
+    comment.belongsTo(image, {
+      foreignKey: "commentableId",
+      constraints: false,
+    });
+
+    video.hasMany(comment, {
+      foreignKey: "commentableId",
+      constraints: false,
+      scope: {
+        commentableType: "video",
+      },
+    });
+    comment.belongsTo(video, {
+      foreignKey: "commentableId",
+      constraints: false,
+    });
+
+    let result = {};
+
+    /*let imageRes = await image.create({
+      title: "Second Image Title",
+      url: "Second Image Url",
+    });
+    let videoRes = await video.create({
+      title: "Second Video Title",
+      text: "Second Video Text",
+    });
+    let commentRes: any;
+    if (imageRes && imageRes?.id) {
+      commentRes = await comment.create({
+        title: "Good image",
+        commentableId: imageRes.id,
+        commentableType: "Image",
+      });
+    }
+    if (videoRes && videoRes?.id) {
+      commentRes = await comment.create({
+        title: "Good Video",
+        commentableId: videoRes.id,
+        commentableType: "Video",
+      });
+    }*/
+    // response.data = commentRes;
+
+    /*
+    result = await image.findAll({
+      include: {
+        model: comment,
+      },
+    });
+    */
+
+    result = await video.findAll({
+      include: {
+        model: comment,
+      },
+    });
+
+    let response = new ApiResponseDTO();
+    response.data = result;
+    response.message = "Created";
+
+    res.send(response);
+  } catch (error) {
+    res.send(`Error: ${error}`);
+  }
+}
